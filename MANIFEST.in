@@ -1,1 +1,1 @@
-include skytemple_example_plugin/data/widget/*.ui
+include skytemple_plugin_wondermail/data/widget/*.ui

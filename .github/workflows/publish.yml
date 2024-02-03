@@ -1,0 +1,55 @@
+name: Publish
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build the Python wheel
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build wheels
+        run: pip3 wheel -w dist .
+      - name: Upload wheels
+        uses: actions/upload-artifact@v3
+        with:
+          name: wheels
+          path: dist/*.whl
+  deploy-pypi:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy wheels to PyPI
+    steps:
+      - name: Download wheels
+        uses: actions/download-artifact@v3
+        with:
+          name: wheels
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
+          pip install twine
+      - name: Publish wheels to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          twine upload *.whl
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download wheels
+        uses: actions/download-artifact@v3
+        with:
+          name: wheels
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "*.whl"

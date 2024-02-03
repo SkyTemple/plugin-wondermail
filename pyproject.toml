@@ -3,12 +3,12 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "skytemple_example_plugin"
+name = "skytemple_plugin_wondermail"
 version = "1.6.0"
 authors = [
     {name = "Marco 'Capypara' Köpcke", email = "hello@capypara.de"},
 ]
-description = "An example plugin for SkyTemple."
+description = "Wonder Mail generator plugin for SkyTemple."
 readme = "README.md"
 requires-python = ">=3.9"
 keywords = ["skytemple", "skytemple-plugin"]
@@ -26,4 +26,4 @@ dependencies = [
 ]
 
 [project.entry-points."skytemple.module"]
-example_plugin = "skytemple_example_plugin.module:ExamplePluginModule"
+wonder_mail = "skytemple_plugin_wondermail.module:WonderMailPluginModule"

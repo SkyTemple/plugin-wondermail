@@ -1,18 +1,8 @@
-# SkyTemple Example Plugin
-This is an example plugin for [SkyTemple](https://skytemple.org).
+# SkyTemple Wonder Mail Plugin
+This plugin allows generating Wonder Mail S codes from SkyTemple.
 
-To install this with a regular SkyTemple Python-based installation
-("development setup"), just install this via `pip`. 
-It will then load automatically. This also works in editable mode.
+To use it, open a ROM and select the "Wonder Mail" section.
 
-To install this with the SkyTemple Flatpak or Mac/Windows distributions,
-see our [wiki](https://wiki.skytemple.org/index.php/Plugin).
-
-## What this plugin does
-This plugin adds a new `Pokémon Spawns` entry to the item tree
-that has an entry for each Pokémon to edit their spawns on every
-dungeon floor.
-
-## How to write your own plugin
-See the [`docs/plugin_dev.rst`](https://github.com/SkyTemple/skytemple/blob/master/docs/plugin_dev.rst)
-file in the SkyTemple repository for more information.
+## Installation
+1. Download the latest release from the [releases page](https://github.com/SkyTemple/plugin-wondermail/releases) (download the ".whl" file).
+2. Refer to the [wiki](https://wiki.skytemple.org/index.php/Plugin) for installation instructions.
