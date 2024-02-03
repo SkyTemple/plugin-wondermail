@@ -1,0 +1,58 @@
+name: Lints
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+jobs:
+  typechecks:
+    runs-on: ubuntu-latest
+    name: Type checks
+    strategy:
+      max-parallel: 5
+      matrix:
+        python-version: [ "3.9", "3.10", "3.11", "3.12" ]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: theCapypara/mypy-check@rust-support
+      name: Run type checks
+      with:
+        mypy_flags: '--config-file mypy.ini'
+        requirements: '-r requirements.txt'
+        python_version: '${{ matrix.python-version }}'
+
+  code-formatting:
+    runs-on: ubuntu-latest
+    name: Code Format Check
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: psf/black@stable
+        with:
+          options: "--check -t py39"
+          src: "skytemple_example_plugin"
+
+  import-check:
+    runs-on: ubuntu-latest
+    name: Check unused imports
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    - name: Dependencies
+      run: |
+        sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 libgirepository1.0-dev
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -e .
+    - name: Analysing the code with pycln
+      run: pycln skytemple_example_plugin -c -a

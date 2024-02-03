@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.22"/>
+  <template class="StExamplePluginMonsterSpawns" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkBox" id="button_box">
+        <child>
+          <object class="GtkButton" id="button_previous">
+            <property name="label" translatable="yes">Previous</property>
+            <signal name="clicked" handler="on_button_previous_clicked"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_next">
+            <property name="label" translatable="yes">Next</property>
+            <signal name="clicked" handler="on_button_next_clicked"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">The sum of all spawn weights for a floor is initially always 10000.
+Double click on left side to jump to floor editor.</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkScrolledWindow">
+        <child>
+          <object class="GtkTreeView" id="tree_spawn_list">
+            <property name="model">store_spawn_list</property>
+            <signal name="button-press-event" handler="on_tree_spawn_list_button_press_event"/>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <property name="title" translatable="yes">Dungeon</property>
+                <child>
+                  <object class="GtkCellRendererText"/>
+                  <attributes>
+                    <attribute name="text">4</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <property name="title" translatable="yes">Floor</property>
+                <child>
+                  <object class="GtkCellRendererText"/>
+                  <attributes>
+                    <attribute name="text">3</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <property name="title" translatable="yes">Normal Weight</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cr_normal_weight">
+                    <property name="editable">True</property>
+                    <signal name="edited" handler="on_cr_normal_weight_edited"/>
+                  </object>
+                  <attributes>
+                    <attribute name="text">5</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <property name="title" translatable="yes">MH Weight</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cr_mh_weight">
+                    <property name="editable">True</property>
+                    <signal name="edited" handler="on_cr_mh_weight_edited"/>
+                  </object>
+                  <attributes>
+                    <attribute name="text">6</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+      </packing>
+    </child>
+  </template>
+  <object class="GtkListStore" id="store_spawn_list">
+    <columns>
+      <!-- column-name floor_list_id -->
+      <column type="gint"/>
+      <!-- column-name floor_id -->
+      <column type="gint"/>
+      <!-- column-name dungeon_id -->
+      <column type="gchararray"/>
+      <!-- column-name floor_id_in_dungeon -->
+      <column type="gchararray"/>
+      <!-- column-name dungeon_nane -->
+      <column type="gchararray"/>
+      <!-- column-name weight_normal -->
+      <column type="gint"/>
+      <!-- column-name weight_mh -->
+      <column type="gint"/>
+    </columns>
+  </object>
+</interface>

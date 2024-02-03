@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skytemple_example_plugin"
+version = "1.6.0"
+authors = [
+    {name = "Marco 'Capypara' Köpcke", email = "hello@capypara.de"},
+]
+description = "An example plugin for SkyTemple."
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["skytemple", "skytemple-plugin"]
+license = {text = "GPL-3.0-or-later"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+]
+dependencies = [
+    'skytemple >= 1.6.0',
+    'skytemple-files >= 1.6.0',
+    'pmdsky-debug-py',
+    'range-typed-integers >= 1.0.0',
+    'pygobject >= 3.26.0'
+]
+
+[project.entry-points."skytemple.module"]
+example_plugin = "skytemple_example_plugin.module:ExamplePluginModule"
